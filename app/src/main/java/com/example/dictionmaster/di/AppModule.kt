@@ -11,7 +11,8 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import com.example.dictionmaster.data.remote.OxfordApi
-import com.example.dictionmaster.constants.Constants.BASE_URL
+import com.example.dictionmaster.repository.SearchRepository
+import com.example.dictionmaster.util.constants.Constants.BASE_URL
 
 
 @Module
@@ -43,5 +44,9 @@ class AppModule {
             .build()
             .create(OxfordApi::class.java)
     }
+
+    @Provides
+    @Singleton
+    fun provideSearchRepository(api: OxfordApi) = SearchRepository(api)
 
 }

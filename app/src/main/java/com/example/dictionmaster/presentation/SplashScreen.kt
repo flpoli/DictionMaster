@@ -2,6 +2,7 @@ package com.example.dictionmaster.presentation
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -25,7 +26,7 @@ fun SplashScreen(
 
 
     LaunchedEffect(key1 = true) {
-        delay(4500L)
+        delay(1000L)
         navController.navigate("search_screen")
     }
 
@@ -38,7 +39,10 @@ fun SplashScreen(
         contentAlignment = Alignment.Center,
     ) {
 
-        Column {
+        Column(
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
             Image(
                 painter = painterResource(id = R.drawable.icon),
                 contentDescription = stringResource(R.string.desc_logo_img)
@@ -50,7 +54,12 @@ fun SplashScreen(
         }
 
         Text(
-            text = stringResource(R.string.dev_name)
+            modifier = Modifier.align(Alignment.BottomCenter),
+            text = stringResource(R.string.dev_name),
         )
     }
+
+
+
+
 }
