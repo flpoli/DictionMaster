@@ -1,4 +1,7 @@
 package com.example.dictionmaster.presentation.search
 
-class SearchViewState {
-}
+import com.example.dictionmaster.data.remote.dto.WordDefinitionDto
+
+data class SearchViewState (
+    val searchResult: WordDefinitionDto? = null
+)

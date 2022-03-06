@@ -25,11 +25,11 @@ class AppModule {
     fun provideOkHttpClient(): OkHttpClient {
 
         return OkHttpClient.Builder()
-            .addInterceptor(
-                HttpLoggingInterceptor().apply {
-                    level = HttpLoggingInterceptor.Level.BODY
-                }
-            )
+//            .addInterceptor(
+//                HttpLoggingInterceptor().apply {
+//                    level = HttpLoggingInterceptor.Level.BODY
+//                }
+//            )
             .build()
     }
 

@@ -1,19 +1,13 @@
 package com.example.dictionmaster.presentation.search
 
-import android.graphics.Paint
-import android.view.Surface
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
@@ -26,13 +20,16 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import com.example.dictionmaster.R
+import com.example.dictionmaster.navigation.Screen
 import com.example.dictionmaster.ui.theme.LightBlue
-import java.nio.file.WatchEvent
 
 @Composable
 fun SearchScreen(
     viewModel: SearchViewModel = hiltViewModel(),
+    navController: NavHostController
 
 ){
 
@@ -41,12 +38,12 @@ fun SearchScreen(
         //viewState = {},
         onLanguageChange = viewModel::onLangSelected,
         onWordChange = viewModel::onWordEnter,
-        viewModel = viewModel
+        viewModel = viewModel,
+        navController = navController
     )
 
 
 }
-
 
 @Composable
 fun SearchScreenContent(
@@ -54,6 +51,7 @@ fun SearchScreenContent(
     onLanguageChange: (String) ->  Unit,
     onWordChange: (String) -> Unit,
     viewModel: SearchViewModel,
+    navController: NavController
 ){
     val word by viewModel.word
     Box(
@@ -69,7 +67,13 @@ fun SearchScreenContent(
             )
 
             SearchButton(
-                onClick = {viewModel.onSearchClicked("en-gb", word)})
+                onClick = {
+                    val lang = "en-gb"
+                    //viewModel.onSearchClicked("en-gb", word)
+
+                    navController.navigate(Screen.ResultScreen.route + "/${lang}" +"/${word}")
+
+                })
         }
 
     }
@@ -79,14 +83,14 @@ fun SearchScreenContent(
 
 }
 
-
-
-
 @Composable
 fun LangSelector(
     modifier: Modifier = Modifier,
     onLanguageChange: (String) -> Unit
 ){
+
+
+    var expanded by remember {mutableStateOf(false)}
 
 
     Box(
@@ -137,9 +141,6 @@ fun SearchField(
     onTextChange: (String) -> Unit,
     value: String
 ){
-
-
-    //val textState = remember {mutableStateOf("null")}
 
    TextField(
        value = value,
