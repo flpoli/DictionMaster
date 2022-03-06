@@ -11,6 +11,7 @@ import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -19,10 +20,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.dictionmaster.R
 import com.example.dictionmaster.ui.theme.LightBlue
 import java.nio.file.WatchEvent
@@ -30,33 +33,59 @@ import java.nio.file.WatchEvent
 @Composable
 fun SearchScreen(
     viewModel: SearchViewModel = hiltViewModel(),
+
 ){
 
-    Box(
-        contentAlignment = Alignment.Center,
 
-        ) {
-
-
-
-        LangSelector()
-        Column(){
-            SearchField()
-
-            SearchButton(
-                onClick = {viewModel.onSearchClicked("en-gb", "education")})
-        }
-
-
-    }
+    SearchScreenContent(
+        //viewState = {},
+        onLanguageChange = viewModel::onLangSelected,
+        onWordChange = viewModel::onWordEnter,
+        viewModel = viewModel
+    )
 
 
 }
 
-@Preview
+
+@Composable
+fun SearchScreenContent(
+    //viewState: SearchViewState,
+    onLanguageChange: (String) ->  Unit,
+    onWordChange: (String) -> Unit,
+    viewModel: SearchViewModel,
+){
+    val word by viewModel.word
+    Box(
+        contentAlignment = Alignment.Center,
+    ) {
+
+        LangSelector(onLanguageChange = onLanguageChange,)
+
+        Column(){
+            SearchField(
+                onTextChange = onWordChange,
+                value = word,
+            )
+
+            SearchButton(
+                onClick = {viewModel.onSearchClicked("en-gb", word)})
+        }
+
+    }
+
+
+
+
+}
+
+
+
+
 @Composable
 fun LangSelector(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onLanguageChange: (String) -> Unit
 ){
 
 
@@ -102,16 +131,22 @@ fun LangSelector(
 
 }
 
-@Preview
-@Composable
-fun SearchField(){
 
-    val textState = remember {mutableStateOf("")}
+@Composable
+fun SearchField(
+    onTextChange: (String) -> Unit,
+    value: String
+){
+
+
+    //val textState = remember {mutableStateOf("null")}
 
    TextField(
-       value = textState.value,
-       onValueChange = { textState.value = it },
-       placeholder = {Text(text = "Type a word...")}
+       value = value,
+       onValueChange = onTextChange,
+       placeholder = {Text(text = "Type a word...")},
+       singleLine = true,
+
    )
 
 }
@@ -130,6 +165,6 @@ fun SearchButton(onClick: () -> Unit){
                 onClick()
             }
     ){
-        Text(text = "SEARCH")
+        Text(text = stringResource(id = R.string.search_btn))
     }
 }

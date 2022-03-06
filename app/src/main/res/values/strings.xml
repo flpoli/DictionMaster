@@ -3,4 +3,5 @@
     <string name="dev_name">by Felipe Policisse</string>
     <string name="desc_logo_img">logo image</string>
     <string name="desc_app_name_img">app name image</string>
+    <string name="search_btn">SEARCH</string>
 </resources>
