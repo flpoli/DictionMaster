@@ -4,4 +4,9 @@
     <string name="desc_logo_img">logo image</string>
     <string name="desc_app_name_img">app name image</string>
     <string name="search_btn">SEARCH</string>
+    <string name="new_search">Try another search now!</string>
+    <string name="new_search_btn">NEW SEARCH</string>
+    <string name="subscribe_text">Subscribe now to get unlimited searches and full access to all features.</string>
+    <string name="offer_text">Try 7 Days Free, then only $19,99 per year. Cancel anytime.</string>
+    <string name="subscribe_btn">SUBSCRIBE</string>
 </resources>

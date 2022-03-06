@@ -28,7 +28,7 @@ class ResultScreenViewModel
 
                     is Resource.Success -> {
                         _searchState.value = SearchViewState(result.data)
-                        println(searchState.value)
+                        //println(searchState.value)
                     }
                 }
             }
