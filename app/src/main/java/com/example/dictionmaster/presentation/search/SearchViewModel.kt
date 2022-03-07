@@ -22,42 +22,20 @@ class SearchViewModel
     private val _word = mutableStateOf("")
     val word = _word
 
-//    private var _searchState = mutableStateOf(SearchViewState())
-//    var searchState: State<SearchViewState> = _searchState
-
+    private val _lang = mutableStateOf("")
+    val lang = _lang
 
     private var cachedSearch = listOf<WordDefinitionDto>()
-    var lang by mutableStateOf(Language)
-        private set
+
 
     fun onWordEnter(word: String) {
         _word.value = word
         println(word)
     }
 
-
-//    fun onSearchClicked(lang: String, word: String) {
-//
-//        viewModelScope.launch(Dispatchers.IO) {
-//
-//            val response = repository.search(lang, word)
-//            println("response? ${response.data}")
-//            when(response){
-//                is Resource.Success -> {
-//                    _searchState.value = SearchViewState(response.data)
-//                    println("In resource success ${_searchState.value }")
-//                    println("SEARCHSTATE PUPLIC? ${searchState.value}")
-//                }
-//            }
-//            return@launch
-//
-//        }
-//    }
-
     fun onLangSelected(lang: String){
-
-//        this.lang = Language(lang)
-//        this.lang = Language.fromString(lang)
+        _lang.value = lang
+        println("lang: $lang")
     }
 
 
