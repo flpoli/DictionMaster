@@ -24,7 +24,9 @@ import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import com.example.dictionmaster.R
 import com.example.dictionmaster.navigation.Screen
+import com.example.dictionmaster.presentation.components.ActionButton
 import com.example.dictionmaster.ui.theme.LightBlue
+import java.nio.file.WatchEvent
 
 @Composable
 fun SearchScreen(
@@ -32,17 +34,12 @@ fun SearchScreen(
     navController: NavHostController
 
 ){
-
-
     SearchScreenContent(
-        //viewState = {},
         onLanguageChange = viewModel::onLangSelected,
         onWordChange = viewModel::onWordEnter,
         viewModel = viewModel,
         navController = navController
     )
-
-
 }
 
 @Composable
@@ -60,27 +57,26 @@ fun SearchScreenContent(
 
         LangSelector(onLanguageChange = onLanguageChange,)
 
-        Column(){
+        Column(
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally,
+        ){
             SearchField(
                 onTextChange = onWordChange,
                 value = word,
             )
 
+            Spacer(modifier = Modifier.height(30.dp))
+
             SearchButton(
                 onClick = {
                     val lang = "en-gb"
-                    //viewModel.onSearchClicked("en-gb", word)
-
                     navController.navigate(Screen.ResultScreen.route + "/${lang}" +"/${word}")
 
-                })
+                }
+            )
         }
-
     }
-
-
-
-
 }
 
 @Composable
@@ -97,15 +93,13 @@ fun LangSelector(
         modifier = Modifier
             .fillMaxSize()
             .background(
-                color = Color.Green,
+                color = Color.White,
 
                 ),
         contentAlignment = Alignment.Center,
 
 
         ){
-
-
         Box(
             //contentAlignment = Alignment.TopCenter,
             modifier = Modifier
@@ -145,7 +139,7 @@ fun SearchField(
    TextField(
        value = value,
        onValueChange = onTextChange,
-       placeholder = {Text(text = "Type a word...")},
+       placeholder = {Text(text = stringResource(id = R.string.input_placeholder))},
        singleLine = true,
 
    )
@@ -153,19 +147,11 @@ fun SearchField(
 }
 
 @Composable
-fun SearchButton(onClick: () -> Unit){
+fun SearchButton(
+    onClick: () -> Unit){
 
-    Box(
-        modifier = Modifier
-            .clip(RoundedCornerShape(30.dp))
-            .background(
-                color = LightBlue,
-                shape = RoundedCornerShape(30.dp),
-            )
-            .clickable {
-                onClick()
-            }
-    ){
-        Text(text = stringResource(id = R.string.search_btn))
-    }
+   ActionButton(
+       text = stringResource(id = R.string.search_btn),
+       onBtnClick = onClick,
+   )
 }
