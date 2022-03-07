@@ -20,7 +20,7 @@ fun SetupNavGraph(navController: NavHostController){
 
     NavHost(
         navController = navController,
-        startDestination =  Screen.SplashScreen.route
+        startDestination =  Screen.PurchaseScreen.route
     ){
         
         composable("splash_screen"){
@@ -46,7 +46,7 @@ fun SetupNavGraph(navController: NavHostController){
         }
 
         composable("purchase_screen"){
-            PurchaseScreen()
+            PurchaseScreen(navController = navController)
         }
     }
 

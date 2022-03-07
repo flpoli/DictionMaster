@@ -4,6 +4,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -14,12 +15,16 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import com.example.dictionmaster.R
+import com.example.dictionmaster.presentation.components.ActionButton
 import java.nio.file.WatchEvent
 
 @Composable
-fun PurchaseScreen(){
+fun PurchaseScreen(navController: NavHostController){
 
 
 Column(
@@ -44,7 +49,7 @@ Column(
         Image(
             modifier = Modifier
                 .align(Alignment.Center)
-                .padding(top = 80.dp),
+                .padding(top = 10.dp),
             painter = painterResource(id = R.drawable.icon),
             contentDescription = "user img on billing screen",
         )
@@ -58,17 +63,28 @@ Column(
             )
 
         Column(
-            modifier = Modifier.align(Alignment.BottomEnd),
-            //verticalArrangement = Arrangement.Bottom,
-            //horizontalAlignment = Alignment.End,
+            modifier = Modifier.align(Alignment.BottomCenter).padding(bottom = 30.dp, end = 32.dp),
+            verticalArrangement = Arrangement.Bottom,
+            horizontalAlignment = Alignment.End,
         ){
+
             Text(
-                modifier = Modifier,
-                text = stringResource(id = R.string.subscribe_text)
+                modifier = Modifier.padding(32.dp, 32.dp),
+                text = stringResource(id = R.string.subscribe_text),
+                style = MaterialTheme.typography.body2,
+                textAlign = TextAlign.Center,
             )
             Text(
-                modifier = Modifier,
-                text = stringResource(id = R.string.offer_text)
+                modifier = Modifier.padding(32.dp, 32.dp),
+                text = stringResource(id = R.string.offer_text),
+                style = MaterialTheme.typography.body1,
+                textAlign = TextAlign.Center,
+
+                )
+
+            ActionButton(
+                text = stringResource(id = R.string.subscribe_btn),
+                onBtnClick = {navController.popBackStack()}
             )
         }
     }

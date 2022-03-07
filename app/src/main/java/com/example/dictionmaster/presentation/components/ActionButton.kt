@@ -14,6 +14,7 @@ import com.example.dictionmaster.ui.theme.LightBlue
 
 @Composable
 fun ActionButton(
+    modifier: Modifier = Modifier,
     text: String,
     onBtnClick: () -> Unit,
     textStyle: TextStyle = MaterialTheme.typography.button
