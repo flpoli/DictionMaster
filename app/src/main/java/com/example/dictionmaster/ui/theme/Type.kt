@@ -9,14 +9,15 @@ import androidx.compose.ui.unit.sp
 val Typography = Typography(
     body1 = TextStyle(
         fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.Normal,
+        fontWeight = FontWeight.Bold,
         fontSize = 16.sp
     ),
     body2 = TextStyle(
         fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.Bold,
-        fontSize = 20.sp
+        fontWeight = FontWeight.Normal,
+        fontSize = 16.sp
     ),
+
     button = TextStyle(
         fontFamily = FontFamily.Default,
         fontWeight = FontWeight.W500,
@@ -24,9 +25,10 @@ val Typography = Typography(
     ),
     caption = TextStyle(
         fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.Normal,
-        fontSize = 12.sp
+        fontWeight = FontWeight.Bold,
+        fontSize = 45.sp
     ),
+
     h1 = TextStyle(
         fontFamily = FontFamily.Default,
         fontWeight = FontWeight.Normal,
@@ -34,13 +36,13 @@ val Typography = Typography(
     ),
     h2 = TextStyle(
         fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.Normal,
+        fontWeight = FontWeight.Bold,
         fontSize = 26.sp
     ),
     h3 = TextStyle(
         fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.Normal,
-        fontSize = 22.sp
+        fontWeight = FontWeight.Bold,
+        fontSize = 24.sp
     ),
     h4 = TextStyle(
         fontFamily = FontFamily.Default,
@@ -57,4 +59,5 @@ val Typography = Typography(
         fontWeight = FontWeight.Normal,
         fontSize = 14.sp
     ),
+
 )

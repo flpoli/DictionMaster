@@ -30,6 +30,27 @@ fun SplashScreen(
         navController.navigate("search_screen")
     }
 
+
+
+    AppLogoName()
+
+        Text(
+            modifier = Modifier
+
+                .padding(bottom = 41.dp),
+            text = stringResource(R.string.dev_name),
+            style = MaterialTheme.typography.h3
+        )
+    }
+
+
+
+
+
+
+@Composable
+fun AppLogoName(){
+
     Box(
         modifier = Modifier
             .background(Color.White)
@@ -52,17 +73,6 @@ fun SplashScreen(
                 contentDescription = stringResource(R.string.desc_app_name_img)
             )
         }
-
-        Text(
-            modifier = Modifier
-                .align(Alignment.BottomCenter)
-                .padding(bottom = 41.dp),
-            text = stringResource(R.string.dev_name),
-            style = MaterialTheme.typography.h3
-        )
     }
-
-
-
 
 }

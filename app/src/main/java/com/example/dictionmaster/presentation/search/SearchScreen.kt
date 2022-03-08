@@ -88,6 +88,7 @@ fun SearchField(
     value: String
 ){
 
+    // A questão da validação do campo é relativo à rota do navController e não a null pointer
    TextField(
        value = value,
        onValueChange = onTextChange,

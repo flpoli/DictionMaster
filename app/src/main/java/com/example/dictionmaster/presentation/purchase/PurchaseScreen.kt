@@ -20,6 +20,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import com.example.dictionmaster.R
+import com.example.dictionmaster.navigation.Screen
 import com.example.dictionmaster.presentation.components.ActionButton
 import java.nio.file.WatchEvent
 
@@ -84,14 +85,10 @@ Column(
 
             ActionButton(
                 text = stringResource(id = R.string.subscribe_btn),
-                onBtnClick = {navController.popBackStack()}
+                onBtnClick = {navController.navigate(Screen.SplashScreen.route)}
             )
         }
     }
-
-
-
-
 }
 
 
