@@ -1,5 +1,6 @@
 package com.example.dictionmaster.presentation
 
+import android.graphics.Paint
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -12,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.dictionmaster.R
@@ -31,26 +33,6 @@ fun SplashScreen(
     }
 
 
-
-    AppLogoName()
-
-        Text(
-            modifier = Modifier
-
-                .padding(bottom = 41.dp),
-            text = stringResource(R.string.dev_name),
-            style = MaterialTheme.typography.h3
-        )
-    }
-
-
-
-
-
-
-@Composable
-fun AppLogoName(){
-
     Box(
         modifier = Modifier
             .background(Color.White)
@@ -59,20 +41,35 @@ fun AppLogoName(){
     ) {
 
         Column(
+            modifier = Modifier.padding(top = 78.dp),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Image(
-                modifier = Modifier.padding(top = 60.dp),
+
                 painter = painterResource(id = R.drawable.icon),
                 contentDescription = stringResource(R.string.desc_logo_img)
             )
             Image(
-                modifier = Modifier.padding(start = 22.dp, bottom = 200.dp),
+                modifier = Modifier
+                    .padding(start = 32.dp)
+                    .align(Alignment.CenterHorizontally),
+
                 painter = painterResource(id = R.drawable.title),
                 contentDescription = stringResource(R.string.desc_app_name_img)
+            )
+
+            Text(
+                modifier = Modifier
+                    .align(Alignment.CenterHorizontally)
+                    .padding(top = 288.dp),
+                textAlign = TextAlign.Center,
+                text = stringResource(R.string.dev_name),
+                style = MaterialTheme.typography.subtitle1,
+                color = MaterialTheme.colors.primary,
             )
         }
     }
 
 }
+

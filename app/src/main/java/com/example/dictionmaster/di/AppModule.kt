@@ -1,6 +1,8 @@
 package com.example.dictionmaster.di
 
 
+import android.app.Application
+import com.example.dictionmaster.data.local.WordDb
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -25,11 +27,11 @@ class AppModule {
     fun provideOkHttpClient(): OkHttpClient {
 
         return OkHttpClient.Builder()
-//            .addInterceptor(
-//                HttpLoggingInterceptor().apply {
-//                    level = HttpLoggingInterceptor.Level.BODY
-//                }
-//            )
+            .addInterceptor(
+                HttpLoggingInterceptor().apply {
+                    level = HttpLoggingInterceptor.Level.BODY
+                }
+            )
             .build()
     }
 
@@ -50,3 +52,11 @@ class AppModule {
     fun provideSearchRepository(api: OxfordApi) = SearchRepository(api)
 
 }
+
+//    @Provides
+//    @Singleton
+//    fun provideDataBase(app: Application): WordDb {
+//
+//        return
+//
+//    }

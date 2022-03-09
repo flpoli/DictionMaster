@@ -19,7 +19,6 @@ class ResultScreenViewModel
     var searchState: State<SearchViewState> = _searchState
 
         fun onSearchClicked(lang: String, word: String){
-
             viewModelScope.launch {
 
                 val result = repository.search(lang, word)
@@ -28,7 +27,12 @@ class ResultScreenViewModel
 
                     is Resource.Success -> {
                         _searchState.value = SearchViewState(result.data)
-                        //println(searchState.value)
+
+                        println(searchState)
+
+                    }
+                    is Resource.Error -> {
+                        println(result.message)
                     }
                 }
             }
