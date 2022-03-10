@@ -42,7 +42,10 @@ fun SearchScreenContent(
     navController: NavController
 ){
     val word by viewModel.word
-    val lang by viewModel.lang
+    val langCode by viewModel.langCode
+    var countLimit by remember { viewModel.countLimit }
+
+    val langs = listOf("ENGLISH", "SPANISH", "FRENCH")
 
 
         Column(
@@ -52,7 +55,9 @@ fun SearchScreenContent(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ){
-            LangSelector()
+            LangSelector(
+                languages = langs,
+                )
 
         }
 
@@ -61,8 +66,6 @@ fun SearchScreenContent(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally,
         ){
-
-
 
             SearchField(
                 onTextChange = onWordChange,
@@ -73,8 +76,13 @@ fun SearchScreenContent(
 
             SearchButton(
                 onClick = {
-                    val lang = "en-gb"
-                    navController.navigate(Screen.ResultScreen.route + "/${lang}" +"/${word}")
+
+                    if(viewModel.onSearchLimitReached(countLimit)){
+                        navController.navigate(Screen.PurchaseScreen.route)
+                    } else {
+                        navController.navigate(Screen.ResultScreen.route + "/${langCode}" +"/${word}")
+                        countLimit++
+                    }
 
                 }
             )

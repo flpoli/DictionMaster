@@ -1,11 +1,15 @@
 package com.example.dictionmaster.presentation.search
 
+import androidx.annotation.DrawableRes
 import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.res.painterResource
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.dictionmaster.R
 import com.example.dictionmaster.data.remote.dto.WordDefinitionDto
 import com.example.dictionmaster.domain.model.Language
 import com.example.dictionmaster.repository.SearchRepository
@@ -22,22 +26,38 @@ class SearchViewModel
     private val _word = mutableStateOf("")
     val word = _word
 
-    private val _lang = mutableStateOf("")
+    private val _lang = mutableStateOf("ENGLISH")
     val lang = _lang
 
-    private var cachedSearch = listOf<WordDefinitionDto>()
+    private val _langCode = mutableStateOf("en-gb")
+    val langCode = _langCode
 
+    private var _count = mutableStateOf(0)
+    var countLimit = _count
 
     fun onWordEnter(word: String) {
-
             _word.value = word
-            println(word)
 
     }
 
     fun onLangSelected(lang: String){
         _lang.value = lang
-        println("lang: $lang")
+
+        when(_lang.value) {
+
+            "ENGLISH" -> _langCode.value = "en-gb"
+            "SPANISH" -> _langCode.value = "es"
+            "FRENCH" -> _langCode.value = "fr"
+        }
+    }
+
+    fun onSearchLimitReached(count: Int): Boolean{
+
+        _count.value = count
+
+        println("CONTAGEM: ${countLimit}}")
+        return count >= 2
+
     }
 
 

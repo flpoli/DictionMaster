@@ -28,7 +28,7 @@ fun SplashScreen(
 
 
     LaunchedEffect(key1 = true) {
-        delay(5000L)
+        delay(1000L)
         navController.navigate("search_screen")
     }
 
@@ -46,7 +46,7 @@ fun SplashScreen(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Image(
-
+                //modifier = Modifier.weight(1f),
                 painter = painterResource(id = R.drawable.icon),
                 contentDescription = stringResource(R.string.desc_logo_img)
             )

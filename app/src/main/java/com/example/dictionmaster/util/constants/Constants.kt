@@ -3,7 +3,7 @@ package com.example.dictionmaster.util.constants
 object Constants {
 
     const val BASE_URL = "https://od-api.oxforddictionaries.com/api/v2/entries/"
-    const val APP_KEY = "ef3df53fdf9d3d304f4f319267117417"
-    const val APP_ID  = "16e5ea1f"
+    const val APP_KEY = "027278ef18d0fd759dec206e98c25c49"
+    const val APP_ID  = "d2513dcb"
 
 }

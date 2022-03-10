@@ -42,10 +42,7 @@ fun ResultScreen(
     viewModel.onSearchClicked(lang, word)
     val word = viewModel.searchState.value.searchResult
     val result = viewModel.searchState.value.searchResult?.results
-    val w =
-        viewModel.searchState.value.searchResult?.results?.get(0)?.lexicalEntries?.get(0)?.entries?.get(
-            0
-        )
+    val w = viewModel.searchState.value.searchResult?.results?.get(0)?.lexicalEntries?.get(0)?.entries?.get(0)
     val spelling = w?.pronunciations?.get(0)?.phoneticSpelling
     val audioUrl = w?.pronunciations?.get(0)?.audioFile
     val senses = w?.senses
@@ -181,7 +178,7 @@ fun ResultScreen(
         def?.forEachIndexed { index, sense ->
             Definitions(
                 index = index,
-                def = parseResponse(sense.definitions),//sense.definitions,
+                def = parseResponse(sense.definitions),
                 shortDef = parseResponse(sense.shortDefinitions),
                 examples = sense.examples,
                 subsenses = sense.subsenses
@@ -218,21 +215,21 @@ fun ResultScreen(
                 )
                 Spacer(modifier = Modifier.height(10.dp))
 
-                examples?.forEach { it ->
+                examples?.forEach { ex ->
                     Text(
-                        text = "EXAMPLE ${it.text}",
+                        text = "EXAMPLE ${ex.text}",
                         style = MaterialTheme.typography.body2,
                         color = MaterialTheme.colors.primary
                     )
 
-                subsenses?.forEach {
+                subsenses?.forEach {  sub ->
                     Text(
-                        text = " SUB DEF ${it.definitions}",
+                        text = " SUB DEF ${sub.definitions}",
                         style = MaterialTheme.typography.body2,
                         color = MaterialTheme.colors.primary
                     )
                     Text(
-                        text = "SUB EX ${it.examples}",
+                        text = "SUB EX ${sub.examples}",
                         style = MaterialTheme.typography.body2,
                         color = MaterialTheme.colors.primary
                     )
@@ -243,9 +240,6 @@ fun ResultScreen(
                 )
 
             }
-
-
-
         }
     }
 
