@@ -37,7 +37,6 @@ class SearchViewModel
 
     fun onWordEnter(word: String) {
             _word.value = word
-
     }
 
     fun onLangSelected(lang: String){

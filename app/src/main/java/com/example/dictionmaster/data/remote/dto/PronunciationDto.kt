@@ -1,9 +1,10 @@
 package com.example.dictionmaster.data.remote.dto
 
 
+import com.example.dictionmaster.domain.model.Pronunciation
 import com.google.gson.annotations.SerializedName
 
-data class Pronunciation(
+data class PronunciationDto(
     @SerializedName("audioFile")
     val audioFile: String,
     @SerializedName("dialects")
@@ -13,3 +14,15 @@ data class Pronunciation(
     @SerializedName("phoneticSpelling")
     val phoneticSpelling: String
 )
+
+fun PronunciationDto.toPronunciation(): Pronunciation {
+
+    return Pronunciation(
+
+        audioFile = audioFile,
+        phoneticNotation = phoneticNotation,
+        phoneticSpelling = phoneticSpelling
+
+    )
+
+}

@@ -3,13 +3,13 @@ package com.example.dictionmaster.data.remote.dto
 
 import com.google.gson.annotations.SerializedName
 
-data class Result(
+data class ResultDto(
     @SerializedName("id")
     val id: String,
     @SerializedName("language")
     val language: String,
     @SerializedName("lexicalEntries")
-    val lexicalEntries: List<LexicalEntry>,
+    val lexicalEntries: List<LexicalEntryDto>,
     @SerializedName("type")
     val type: String,
     @SerializedName("word")

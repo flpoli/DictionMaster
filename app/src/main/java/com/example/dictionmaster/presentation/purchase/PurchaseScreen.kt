@@ -50,7 +50,7 @@ Column(
         Image(
             modifier = Modifier
                 .align(Alignment.Center)
-                .padding(top = 10.dp),
+                .padding(top = 50.dp),
             painter = painterResource(id = R.drawable.icon),
             contentDescription = "user img on billing screen",
         )
@@ -58,27 +58,29 @@ Column(
         Image(
             modifier = Modifier
                 .align(Alignment.Center)
-                .padding(start = 30.dp, top = 240.dp,),
+                .padding(start = 30.dp, top = 210.dp,),
             painter = painterResource(id = R.drawable.title),
             contentDescription = "user img on billing screen",
             )
 
         Column(
-            modifier = Modifier.align(Alignment.BottomCenter).padding(bottom = 30.dp, end = 32.dp),
+            modifier = Modifier
+                .align(Alignment.BottomCenter)
+                .padding(start = 27.dp,bottom = 28.dp, end = 30.dp),
             verticalArrangement = Arrangement.Bottom,
             horizontalAlignment = Alignment.End,
         ){
 
             Text(
-                modifier = Modifier.padding(32.dp, 32.dp),
+                modifier = Modifier.padding(top = 60.dp),
                 text = stringResource(id = R.string.subscribe_text),
-                style = MaterialTheme.typography.body2,
+                style = MaterialTheme.typography.body1,
                 textAlign = TextAlign.Center,
             )
             Text(
                 modifier = Modifier.padding(32.dp, 32.dp),
                 text = stringResource(id = R.string.offer_text),
-                style = MaterialTheme.typography.body1,
+                style = MaterialTheme.typography.body2,
                 textAlign = TextAlign.Center,
 
                 )

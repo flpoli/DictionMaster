@@ -1,7 +1,6 @@
 package com.example.dictionmaster.repository
 
 import com.example.dictionmaster.data.remote.OxfordApi
-import com.example.dictionmaster.data.remote.dto.Result
 import com.example.dictionmaster.data.remote.dto.WordDefinitionDto
 import com.example.dictionmaster.util.Resource
 import javax.inject.Inject

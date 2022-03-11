@@ -1,5 +1,6 @@
 package com.example.dictionmaster.presentation.components
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -9,9 +10,12 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.dictionmaster.R
 import com.example.dictionmaster.presentation.search.SearchViewModel
 
 
@@ -28,6 +32,11 @@ fun LangSelector(
         modifier = Modifier
             .wrapContentSize(Alignment.TopStart)
     ) {
+
+//        Image(
+//            painter = languages.get(selectedIndex),
+//            contentDescription = "lang icon"
+//        )
 
         Text(
             text = languages[selectedIndex],

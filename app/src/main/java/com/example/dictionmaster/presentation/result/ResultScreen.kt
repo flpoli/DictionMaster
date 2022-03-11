@@ -1,6 +1,5 @@
 package com.example.dictionmaster.presentation.result
 
-import android.text.TextUtils.indexOf
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -18,13 +17,12 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.example.dictionmaster.R
-import com.example.dictionmaster.data.remote.dto.Example
-import com.example.dictionmaster.data.remote.dto.Sense
-import com.example.dictionmaster.data.remote.dto.Subsense
+import com.example.dictionmaster.data.remote.dto.ExampleDto
+import com.example.dictionmaster.data.remote.dto.SenseDto
+import com.example.dictionmaster.data.remote.dto.SubsenseDto
 import com.example.dictionmaster.navigation.Screen
 import com.example.dictionmaster.presentation.components.ActionButton
 import com.example.dictionmaster.util.playPronunciation
-import java.nio.file.WatchEvent
 
 
 fun parseResponse(res: List<String>): String {
@@ -46,6 +44,8 @@ fun ResultScreen(
     val spelling = w?.pronunciations?.get(0)?.phoneticSpelling
     val audioUrl = w?.pronunciations?.get(0)?.audioFile
     val senses = w?.senses
+
+    println("Senses? $senses")
 
     LazyColumn() {
 
@@ -173,7 +173,7 @@ fun ResultScreen(
     @Composable
     fun DefinitionsSection(
         modifier: Modifier = Modifier,
-        def: List<Sense>?
+        def: List<SenseDto>?
     ) {
         def?.forEachIndexed { index, sense ->
             Definitions(
@@ -191,8 +191,8 @@ fun ResultScreen(
         index: Int,
         def: String,
         shortDef: String,
-        examples: List<Example>?,
-        subsenses: List<Subsense>?,
+        examples: List<ExampleDto>?,
+        subsenses: List<SubsenseDto>?,
     ) {
 
         Box(
