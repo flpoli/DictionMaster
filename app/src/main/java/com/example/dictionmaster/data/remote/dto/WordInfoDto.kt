@@ -1,10 +1,10 @@
 package com.example.dictionmaster.data.remote.dto
 
 
-import com.example.dictionmaster.domain.model.WordDefinition
+import com.example.dictionmaster.domain.model.WordInfo
 import com.google.gson.annotations.SerializedName
 
-data class WordDefinitionDto(
+data class WordInfoDto(
     @SerializedName("id")
     val id: String,
     @SerializedName("metadata")
@@ -15,9 +15,9 @@ data class WordDefinitionDto(
     val word: String
 )
 
-fun WordDefinitionDto.toWordDefinition(): WordDefinition {
+fun WordInfoDto.toWordDefinition(): WordInfo {
 
-    return WordDefinition(
+    return WordInfo(
         id = id,
         word = word,
         results = results

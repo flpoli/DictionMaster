@@ -1,8 +1,6 @@
 package com.example.dictionmaster.di
 
 
-import android.app.Application
-import com.example.dictionmaster.data.local.WordDb
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -55,7 +53,7 @@ class AppModule {
 
 //    @Provides
 //    @Singleton
-//    fun provideDataBase(app: Application): WordDb {
+//    fun provideDataBase(app: Application): WordInfoDatabase {
 //
 //        return
 //

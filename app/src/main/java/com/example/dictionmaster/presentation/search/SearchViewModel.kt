@@ -11,7 +11,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.dictionmaster.R
 import com.example.dictionmaster.data.remote.dto.WordDefinitionDto
-import com.example.dictionmaster.domain.model.Language
 import com.example.dictionmaster.repository.SearchRepository
 import com.example.dictionmaster.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel

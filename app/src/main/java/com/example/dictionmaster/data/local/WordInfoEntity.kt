@@ -4,17 +4,20 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.example.dictionmaster.data.remote.dto.SenseDto
 import com.example.dictionmaster.data.remote.dto.SubsenseDto
-
+import com.example.dictionmaster.domain.model.Sense
+import com.example.dictionmaster.domain.model.Subsense
+import com.example.dictionmaster.domain.model.Result
 @Entity
-data class WordEntity (
+data class WordInfoEntity (
 
     @PrimaryKey
     val id: Int? = null,
     val word: String,
-    val senses: List<SenseDto>,
-    val subSenses: List<SubsenseDto>,
-    val spellingIpa: String,
-    val audioUrl: String,
+
+    // deveria ser ...:
+
+    val results: List<Result>
+
 )
 
 

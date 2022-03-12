@@ -2,7 +2,7 @@ package com.example.dictionmaster.data.remote
 
 import com.example.dictionmaster.util.constants.Constants.APP_ID
 import com.example.dictionmaster.util.constants.Constants.APP_KEY
-import com.example.dictionmaster.data.remote.dto.WordDefinitionDto
+import com.example.dictionmaster.data.remote.dto.WordInfoDto
 import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.Path
@@ -14,7 +14,7 @@ interface OxfordApi {
       suspend fun searchWord(
         @Path("lang") lang: String,
         @Path("word") word: String
-    ): WordDefinitionDto
+    ): WordInfoDto
 
 }
 

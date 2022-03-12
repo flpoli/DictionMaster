@@ -6,7 +6,6 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import com.example.dictionmaster.data.remote.dto.WordDefinitionDto
 import com.example.dictionmaster.presentation.search.SearchScreen
 import com.example.dictionmaster.presentation.SplashScreen
 import com.example.dictionmaster.presentation.purchase.PurchaseScreen
