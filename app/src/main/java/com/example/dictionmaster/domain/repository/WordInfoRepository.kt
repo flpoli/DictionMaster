@@ -7,5 +7,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface WordInfoRepository {
 
-    fun getWordInfo(lang: String, word: String): Flow<Resource<WordInfoDto>>
+    suspend fun getWordInfo(lang: String, word: String): Resource<WordInfoDto>
 }

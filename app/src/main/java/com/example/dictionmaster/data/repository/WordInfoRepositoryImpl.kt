@@ -16,18 +16,11 @@ class WordInfoRepositoryImpl(private val api: OxfordApi): WordInfoRepository {
 
 
 
-        override fun getWordInfo(lang: String, word: String): Flow<Resource<WordInfoDto>> = flow {
+        override suspend fun getWordInfo(lang: String, word: String): Resource<WordInfoDto> {
 
             val remoteInfo = api.getWordInfo(lang, word)
-            emit(Resource.Loading())
-            try{
-                Resource.Loading(remoteInfo)
 
-                emit(Resource.Success(remoteInfo))
-            }catch(e: HttpException){
+            return Resource.Success(remoteInfo)
 
-                Resource.Error(message = "${R.string.on_http_error}", remoteInfo)
-
-            }
         }
 }

@@ -8,6 +8,7 @@ import com.example.dictionmaster.domain.use_case.GetWordInfo
 import com.example.dictionmaster.presentation.search.SearchViewState
 import com.example.dictionmaster.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.launchIn
@@ -30,17 +31,13 @@ class ResultScreenViewModel
 
     fun onSearch(lang: String, query: String){
 
-        _searchQuery.value = query
+        viewModelScope.launch(Dispatchers.IO) {
 
-        viewModelScope.launch {
+            val result = getWordInfo(lang, query)
 
-            delay(500L)
-
-            getWordInfo(lang, query)
-                .onEach { result ->
                     when(result) {
                         is Resource.Success -> {
-                            _state.value = state.value.copy(
+                            _state.value = SearchViewState(
                                 wordInfoItems = result.data,
                                 isLoading = false
                             )
@@ -48,22 +45,20 @@ class ResultScreenViewModel
                         }
                         is Resource.Error -> {
 
-                            _state.value = state.value.copy(
+                            _state.value = SearchViewState(
                                 wordInfoItems = result.data,
                                 isLoading = false
                             )
 
                         }
                         is Resource.Loading ->  {
-                            _state.value = state.value.copy(
+                            _state.value = SearchViewState(
                                 wordInfoItems = result.data,
                                 isLoading = true
                             )
                         }
 
                     }
-                }.launchIn(this)
-
+                }
         }
     }
-}

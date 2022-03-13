@@ -39,14 +39,16 @@ fun ResultScreen(
     lang: String,
     word: String
 ) {
+    viewModel.onSearch(lang, word)
+
+
 
     val state by remember {
         viewModel.state
     }
-
     val w = state.wordInfoItems
 
-    viewModel.onSearch(lang, word)
+
 
     val audioFile = w?.results?.get(0)?.lexicalEntries?.get(0)?.entries?.get(0)?.pronunciations?.get(0)?.audioFile
     val phoneticSpelling = w?.results?.get(0)?.lexicalEntries?.get(0)?.entries?.get(0)?.pronunciations?.get(0)?.phoneticSpelling
