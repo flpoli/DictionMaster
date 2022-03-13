@@ -12,7 +12,7 @@ Há duas branches no repositório, em que eu cheguei em diferentes partes do des
  -  ALL-SCREEN-WORK-NO-CACHE:
  
     Neste caso não há mecanismo de cache mas é possível seguir o fluxo feliz de utilização.
-    A questão do parse do JSON se mostrou novamente desafiador, uma vez que o app quebra dependendo da busca realizada,
+    A questão do parse do JSON se mostrou novamente desafiadora, uma vez que o app quebra dependendo da busca realizada,
     p.ex.: buscando por 'Dog', o fluxo segue normalmente, mas buscando por 'Perro' ou 'Chiot' não.
     Isso acontece pois o Json que a api devolve não é necessariamente igual para todas as línguas,
     e a solução encontrada para contornar isto está longe do ideal. 
