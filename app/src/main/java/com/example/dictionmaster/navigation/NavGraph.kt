@@ -10,8 +10,6 @@ import com.example.dictionmaster.presentation.search.SearchScreen
 import com.example.dictionmaster.presentation.SplashScreen
 import com.example.dictionmaster.presentation.purchase.PurchaseScreen
 import com.example.dictionmaster.presentation.result.ResultScreen
-import com.google.gson.Gson
-import com.google.gson.GsonBuilder
 
 @Composable
 fun SetupNavGraph(navController: NavHostController){

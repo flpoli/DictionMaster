@@ -27,14 +27,12 @@ class ResultScreenViewModel
     private val _searchQuery = mutableStateOf("")
     val searchQuery: State<String> = _searchQuery
 
-    private var searchJob: Job? = null
 
     fun onSearch(lang: String, query: String){
 
         _searchQuery.value = query
-        searchJob?.cancel()
 
-        searchJob = viewModelScope.launch {
+        viewModelScope.launch {
 
             delay(500L)
 
