@@ -14,7 +14,7 @@ interface OxfordApi {
       suspend fun getWordInfo(
         @Path("lang") lang: String,
         @Path("word") word: String
-    ): List<WordInfoDto>
+    ): WordInfoDto
 
 }
 

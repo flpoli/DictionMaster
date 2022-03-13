@@ -77,9 +77,9 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideWordInfoRepository(api: OxfordApi, db: WordInfoDatabase): WordInfoRepository {
+    fun provideWordInfoRepository(api: OxfordApi): WordInfoRepository {
 
-        return WordInfoRepositoryImpl(api, db.dao)
+        return WordInfoRepositoryImpl(api)
     }
 
     @Provides

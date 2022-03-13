@@ -43,24 +43,22 @@ class ResultScreenViewModel
                     when(result) {
                         is Resource.Success -> {
                             _state.value = state.value.copy(
-                                wordInfoItems = result.data ?: emptyList(),
+                                wordInfoItems = result.data,
                                 isLoading = false
                             )
-                            println("RESULT DATA \n${ result.data }")
-
 
                         }
                         is Resource.Error -> {
 
                             _state.value = state.value.copy(
-                                wordInfoItems = result.data ?: emptyList(),
+                                wordInfoItems = result.data,
                                 isLoading = false
                             )
 
                         }
                         is Resource.Loading ->  {
                             _state.value = state.value.copy(
-                                wordInfoItems = result.data ?: emptyList(),
+                                wordInfoItems = result.data,
                                 isLoading = true
                             )
                         }

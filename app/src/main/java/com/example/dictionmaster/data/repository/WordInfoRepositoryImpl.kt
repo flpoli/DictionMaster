@@ -1,58 +1,33 @@
 package com.example.dictionmaster.data.repository
 
+import androidx.compose.material.MaterialTheme.typography
 import com.example.dictionmaster.R
-import com.example.dictionmaster.data.local.WordInfoDao
-import com.example.dictionmaster.data.local.entity.toWordInfo
 import com.example.dictionmaster.data.remote.OxfordApi
-import com.example.dictionmaster.data.remote.dto.toWordInfoEntity
-//import com.example.dictionmaster.data.remote.dto.toWordInfoEntity
+import com.example.dictionmaster.data.remote.dto.WordInfoDto
+import com.example.dictionmaster.data.remote.dto.toWordInfo
 import com.example.dictionmaster.domain.model.WordInfo
 import com.example.dictionmaster.domain.repository.WordInfoRepository
 import com.example.dictionmaster.util.Resource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import okio.IOException
 import retrofit2.HttpException
-import javax.inject.Inject
 
-class WordInfoRepositoryImpl(private val api: OxfordApi, private val dao: WordInfoDao): WordInfoRepository {
-
+class WordInfoRepositoryImpl(private val api: OxfordApi): WordInfoRepository {
 
 
-        override fun getWordInfo(lang: String, word: String): Flow<Resource<List<WordInfo>>> = flow {
 
+        override fun getWordInfo(lang: String, word: String): Flow<Resource<WordInfoDto>> = flow {
+
+            val remoteInfo = api.getWordInfo(lang, word)
             emit(Resource.Loading())
+            try{
+                Resource.Loading(remoteInfo)
 
-            val wordInfos = dao.getWordInfos(word).map {it.toWordInfo()}
+                emit(Resource.Success(remoteInfo))
+            }catch(e: HttpException){
 
-            emit(Resource.Loading(data = wordInfos))
+                Resource.Error(message = "${R.string.on_http_error}", remoteInfo)
 
-            try {
-
-                val remoteWordInfos = api.getWordInfo(lang, word)
-                dao.insertWordInfos(remoteWordInfos.map {it.toWordInfoEntity()})
-
-
-            } catch (e: HttpException) {
-
-                emit(Resource.Error(
-                    message = "${R.string.on_http_error}",
-                    data = wordInfos
-                ))
-
-            } catch (e: IOException) {
-
-                emit(Resource.Error(
-                    message = "${R.string.on_io_error}",
-                    data = wordInfos
-                ))
             }
-
-
-            val newWordInfos = dao.getWordInfos(word).map {it.toWordInfo()}
-            println("New INFO: $newWordInfos")
-            emit(Resource.Success(data = newWordInfos))
-
-
         }
 }
