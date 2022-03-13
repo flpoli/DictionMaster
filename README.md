@@ -22,7 +22,7 @@ Há duas branches no repositório, em que eu cheguei em diferentes partes do des
   Um comentário sobre o meu processo:
 
 - Independe do resultado deste processo ele foi de grande valia para mim, uma vez que serviu para elucidar tópicos que merecem atenção durante meus estudos. 
-  Agradeço imençamente esta oportunidade
+  Agradeço imensamente esta oportunidade
     
  Prints das telas implementadas:
 
