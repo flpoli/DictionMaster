@@ -1,23 +1,9 @@
 package com.example.dictionmaster.presentation.search
 
-import androidx.annotation.DrawableRes
-import androidx.compose.runtime.State
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.graphics.painter.Painter
-import androidx.compose.ui.res.painterResource
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.example.dictionmaster.R
 import com.example.dictionmaster.domain.repository.WordInfoRepository
-import com.example.dictionmaster.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -33,11 +19,6 @@ class SearchViewModel
     private val _langCode = mutableStateOf("en-gb")
     val langCode = _langCode
 
-    private var _count = mutableStateOf(0)
-    var countLimit = _count
-
-
-
     fun onWordEnter(word: String) {
             _word.value = word
     }
@@ -52,18 +33,6 @@ class SearchViewModel
             "FRENCH" -> _langCode.value = "fr"
         }
     }
-
-    fun onSearchLimitReached(count: Int): Boolean{
-
-        _count.value = count
-
-        println("CONTAGEM: ${countLimit}}")
-        return count >= 2
-
-    }
-
-
-
 
 }
 

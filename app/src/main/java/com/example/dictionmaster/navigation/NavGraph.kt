@@ -7,7 +7,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.example.dictionmaster.presentation.search.SearchScreen
-import com.example.dictionmaster.presentation.SplashScreen
+import com.example.dictionmaster.presentation.splash.SplashScreen
 import com.example.dictionmaster.presentation.purchase.PurchaseScreen
 import com.example.dictionmaster.presentation.result.ResultScreen
 
@@ -17,7 +17,7 @@ fun SetupNavGraph(navController: NavHostController){
 
     NavHost(
         navController = navController,
-        startDestination =  Screen.SearchScreen.route
+        startDestination =  Screen.SplashScreen.route
     ){
         
         composable("splash_screen"){

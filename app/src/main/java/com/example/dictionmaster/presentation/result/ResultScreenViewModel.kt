@@ -9,10 +9,6 @@ import com.example.dictionmaster.presentation.search.SearchViewState
 import com.example.dictionmaster.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -28,6 +24,8 @@ class ResultScreenViewModel
     private val _searchQuery = mutableStateOf("")
     val searchQuery: State<String> = _searchQuery
 
+    private var _count = mutableStateOf(0)
+    var countLimit = _count
 
     fun onSearch(lang: String, query: String){
 
@@ -61,4 +59,9 @@ class ResultScreenViewModel
                     }
                 }
         }
+
+    fun onSearchLimitReached(limit: Int): Boolean {
+
+        return limit >= 10
+    }
     }

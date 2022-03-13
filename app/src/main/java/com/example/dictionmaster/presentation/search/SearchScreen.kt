@@ -45,13 +45,9 @@ fun SearchScreenContent(
 ){
     val word by viewModel.word
     val langCode by viewModel.langCode
-//    var countLimit by remember { viewModel.countLimit }
 
-//    val langs = mapOf(
-//        "ENGLISH" to painterResource(R.drawable.en_icon),
-//        "SPANISH" to painterResource(R.drawable.es_icon),
-//        "FRENCH" to painterResource(R.drawable.fr_icon))
 
+    val icons = listOf(painterResource(R.drawable.en_icon), painterResource(R.drawable.es_icon), painterResource(R.drawable.fr_icon))
     val langs = listOf("ENGLISH", "SPANISH", "FRENCH")
 
 
@@ -64,6 +60,7 @@ fun SearchScreenContent(
         ){
             LangSelector(
                 languages = langs,
+                icon = icons
                 )
 
         }

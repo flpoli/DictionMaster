@@ -5,24 +5,26 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.*
+import androidx.compose.material.DropdownMenu
+import androidx.compose.material.DropdownMenuItem
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.example.dictionmaster.R
 import com.example.dictionmaster.presentation.search.SearchViewModel
 
 
 @Composable
 fun LangSelector(
     languages: List<String>,
+    icon: List<Painter>,
     viewModel: SearchViewModel = hiltViewModel()
+
 ) {
     val disabledValue: String = ""
     var expanded by remember { mutableStateOf(false) }
@@ -33,16 +35,12 @@ fun LangSelector(
             .wrapContentSize(Alignment.TopStart)
     ) {
 
-//        Image(
-//            painter = languages.get(selectedIndex),
-//            contentDescription = "lang icon"
-//        )
-
         Text(
             text = languages[selectedIndex],
             textAlign = TextAlign.Center,
             modifier = Modifier
-                .size(130.dp, 38.dp)
+                .align(Alignment.CenterStart)
+                .size(130.dp, 25.dp)
                 .clickable(
                     onClick = {
                         expanded = true
@@ -51,6 +49,13 @@ fun LangSelector(
                     color = MaterialTheme.colors.secondaryVariant,
                     shape = RoundedCornerShape(80.dp)
                 )
+        )
+        Image(
+            modifier = Modifier
+                .padding(start= 2.dp)
+                .align(Alignment.CenterStart),
+            painter = icon[selectedIndex],
+            contentDescription = null
         )
         DropdownMenu(
             expanded = expanded,
@@ -73,9 +78,17 @@ fun LangSelector(
                     } else {
                         ""
                     }
+                    Image(
+                        painter = icon[index],
+                        contentDescription = null
+                    )
+                    Spacer(modifier = Modifier.width(6.dp))
                     Text(
                         text = s + disabledText,
-                        textAlign = TextAlign.Center)
+                        textAlign = TextAlign.Center,
+                        style = MaterialTheme.typography.body2
+                    )
+
                 }
             }
         }
