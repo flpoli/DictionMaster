@@ -10,17 +10,19 @@ import androidx.compose.ui.res.painterResource
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.dictionmaster.R
-import com.example.dictionmaster.data.remote.dto.WordDefinitionDto
-import com.example.dictionmaster.repository.SearchRepository
+import com.example.dictionmaster.domain.repository.WordInfoRepository
 import com.example.dictionmaster.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class SearchViewModel
-@Inject constructor(private val repository: SearchRepository) : ViewModel() {
+@Inject constructor(private val repository: WordInfoRepository) : ViewModel() {
 
     private val _word = mutableStateOf("")
     val word = _word
@@ -34,8 +36,11 @@ class SearchViewModel
     private var _count = mutableStateOf(0)
     var countLimit = _count
 
+
+
     fun onWordEnter(word: String) {
             _word.value = word
+            println(word)
     }
 
     fun onLangSelected(lang: String){
@@ -57,6 +62,8 @@ class SearchViewModel
         return count >= 2
 
     }
+
+
 
 
 }

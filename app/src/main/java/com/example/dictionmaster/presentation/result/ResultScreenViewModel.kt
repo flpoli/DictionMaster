@@ -4,39 +4,66 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.dictionmaster.domain.repository.WordInfoRepository
 import com.example.dictionmaster.presentation.search.SearchViewState
-import com.example.dictionmaster.repository.SearchRepository
 import com.example.dictionmaster.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class ResultScreenViewModel
-    @Inject constructor(private val repository: SearchRepository): ViewModel() {
+    @Inject constructor(private val repository: WordInfoRepository): ViewModel() {
 
-    private var _searchState = mutableStateOf(SearchViewState())
-    var searchState: State<SearchViewState> = _searchState
 
-        fun onSearchClicked(lang: String, word: String){
-            viewModelScope.launch {
 
-                val result = repository.search(lang, word)
+    private val _state = mutableStateOf(SearchViewState())
+    val state: State<SearchViewState> = _state
 
-                when(result){
 
-                    is Resource.Success -> {
-                        _searchState.value = SearchViewState(result.data)
 
-                        println(searchState)
+    fun onSearch(lang: String, query: String){
+        viewModelScope.launch {
+
+            delay(500L)
+
+            repository.getWordInfo(lang, query)
+                .onEach { result ->
+                    when(result) {
+                        is Resource.Success -> {
+
+                            _state.value = state.value.copy(
+                                wordInfo = result.data,
+                                isLoading = false
+                            )
+                        }
+
+                        is Resource.Error -> {
+
+                            _state.value = state.value.copy(
+                                wordInfo = result.data,
+                                isLoading = false
+                            )
+
+                        }
+
+                        is Resource.Loading ->  {
+                            _state.value = state.value.copy(
+                                wordInfo = result.data,
+                                isLoading = true
+                            )
+                        }
 
                     }
-                    is Resource.Error -> {
-                        println(result.message)
-                    }
-                }
-            }
+                }.launchIn(this)
 
         }
+
+    }
+
+
 
 }

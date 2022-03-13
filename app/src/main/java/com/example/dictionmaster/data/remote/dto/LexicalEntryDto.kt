@@ -1,6 +1,7 @@
 package com.example.dictionmaster.data.remote.dto
 
 
+import com.example.dictionmaster.domain.model.LexicalEntry
 import com.google.gson.annotations.SerializedName
 
 data class LexicalEntryDto(
@@ -15,3 +16,11 @@ data class LexicalEntryDto(
     @SerializedName("text")
     val text: String
 )
+
+fun LexicalEntryDto.toLexicalEntry(): LexicalEntry {
+
+    return LexicalEntry(
+        entries = entries.map { it.toEntry() }
+    )
+
+}

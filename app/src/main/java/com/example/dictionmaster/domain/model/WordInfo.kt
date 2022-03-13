@@ -1,11 +1,15 @@
 package com.example.dictionmaster.domain.model
 
-import com.example.dictionmaster.data.remote.dto.ResultDto
+import androidx.room.Embedded
+import androidx.room.TypeConverters
+import com.example.dictionmaster.data.local.Converters
 
 data class WordInfo(
 
-    val id: String,
-    val word: String,
-    val results: List<ResultDto>
+    //val id: Int? = null,
+    val word: String = "",
+    val results: List<Result> = emptyList()
 
 )
+
+

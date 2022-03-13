@@ -1,7 +1,7 @@
 package com.example.dictionmaster.data.remote.dto
 
 
-import com.example.dictionmaster.domain.model.WordInfo
+import com.example.dictionmaster.data.local.entity.WordInfoEntity
 import com.google.gson.annotations.SerializedName
 
 data class WordInfoDto(
@@ -15,11 +15,10 @@ data class WordInfoDto(
     val word: String
 )
 
-fun WordInfoDto.toWordDefinition(): WordInfo {
+fun WordInfoDto.toWordInfoEntity(): WordInfoEntity {
 
-    return WordInfo(
-        id = id,
+    return WordInfoEntity(
         word = word,
-        results = results
+        results = results.map { it.toResult() },
     )
 }

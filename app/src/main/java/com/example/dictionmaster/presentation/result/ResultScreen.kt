@@ -8,6 +8,10 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.VolumeUp
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.getValue
+
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -20,6 +24,9 @@ import com.example.dictionmaster.R
 import com.example.dictionmaster.data.remote.dto.ExampleDto
 import com.example.dictionmaster.data.remote.dto.SenseDto
 import com.example.dictionmaster.data.remote.dto.SubsenseDto
+import com.example.dictionmaster.domain.model.Example
+import com.example.dictionmaster.domain.model.Sense
+import com.example.dictionmaster.domain.model.Subsense
 import com.example.dictionmaster.navigation.Screen
 import com.example.dictionmaster.presentation.components.ActionButton
 import com.example.dictionmaster.util.playPronunciation
@@ -37,209 +44,215 @@ fun ResultScreen(
     lang: String,
     word: String
 ) {
-    viewModel.onSearchClicked(lang, word)
-    val word = viewModel.searchState.value.searchResult
-    val result = viewModel.searchState.value.searchResult?.results
-    val w = viewModel.searchState.value.searchResult?.results?.get(0)?.lexicalEntries?.get(0)?.entries?.get(0)
-    val spelling = w?.pronunciations?.get(0)?.phoneticSpelling
-    val audioUrl = w?.pronunciations?.get(0)?.audioFile
-    val senses = w?.senses
 
-    println("Senses? $senses")
-
-    LazyColumn() {
-
-        item {
-            if (word != null && spelling != null && audioUrl != null) {
-                WordHeader(
-                    word = word.id,
-                    audioFile = audioUrl,
-                    ipa = spelling
-                )
-            }
-        }
-        item {
-            result?.forEach { _ ->
-
-                DefinitionsSection(
-                    def = senses
-                )
-            }
-
-        }
-
-
-        item {
-            if (word != null) {
-                WordFooter(word = word.id, navController)
-            }
-        }
+    val state by remember {
+        viewModel.state
     }
+
+    viewModel.onSearch(lang, word)
+
+    Text(text = "${state.wordInfo}")
+
+
+//    WordHeader(
+//        word = ,
+//        audioFile = ,
+//        ipa = )
+
+
+//    LazyColumn() {
+//
+//        item {
+//
+//                WordHeader(
+//                    word = word.id,
+//                    audioFile = audioUrl,
+//                    ipa = spelling
+//                )
+//            }
+//
+//        item {
+//            result?.forEach { _ ->
+//
+//                DefinitionsSection(
+//                    def = senses
+//                )
+//            }
+//
+//        }
+//
+//
+//        item {
+//            if (word != null) {
+//                WordFooter(word = word.id, navController)
+//            }
+//        }
+//    }
 }
 
-    @Composable
-    fun WordHeader(
-        word: String,
-        audioFile: String,
-        ipa: String
-    ) {
-        Column() {
+//    @Composable
+//    fun WordHeader(
+//        word: String,
+//        audioFile: String,
+//        ipa: String
+//    ) {
+//        Column() {
+//
+//            Text(
+//                modifier = Modifier.padding(top = 37.dp, start = 30.dp),
+//                text = word,
+//                style = MaterialTheme.typography.caption
+//            )
+//
+//            Row(
+//                modifier = Modifier.padding(top = 13.dp, start = 30.dp),
+//                horizontalArrangement = Arrangement.Center,
+//                verticalAlignment = Alignment.CenterVertically
+//            ) {
+//
+//                Box(
+//                    modifier = Modifier
+//                        .background(
+//                            color = MaterialTheme.colors.secondary,
+//                            shape = RoundedCornerShape(100.dp)
+//                        )
+//                ) {
+//                    IconButton(
+//                        modifier = Modifier,
+//                        onClick = { playPronunciation(audioFile) }
+//                    ) {
+//                        Icon(
+//                            modifier = Modifier.size(30.dp),
+//                            imageVector = Icons.Filled.VolumeUp,
+//                            tint = Color.White,
+//                            contentDescription = "speaker button"
+//                        )
+//                    }
+//                }
+//                Spacer(modifier = Modifier.width(11.dp))
+//                Text(
+//                    text = ipa,
+//                    style = MaterialTheme.typography.h3,
+//                    color = MaterialTheme.colors.primaryVariant
+//
+//                )
+//            }
+//
+//        }
+//
+//
+//    }
 
-            Text(
-                modifier = Modifier.padding(top = 37.dp, start = 30.dp),
-                text = word,
-                style = MaterialTheme.typography.caption
-            )
-
-            Row(
-                modifier = Modifier.padding(top = 13.dp, start = 30.dp),
-                horizontalArrangement = Arrangement.Center,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-
-                Box(
-                    modifier = Modifier
-                        .background(
-                            color = MaterialTheme.colors.secondary,
-                            shape = RoundedCornerShape(100.dp)
-                        )
-                ) {
-                    IconButton(
-                        modifier = Modifier,
-                        onClick = { playPronunciation(audioFile) }
-                    ) {
-                        Icon(
-                            modifier = Modifier.size(30.dp),
-                            imageVector = Icons.Filled.VolumeUp,
-                            tint = Color.White,
-                            contentDescription = "speaker button"
-                        )
-                    }
-                }
-                Spacer(modifier = Modifier.width(11.dp))
-                Text(
-                    text = ipa,
-                    style = MaterialTheme.typography.h3,
-                    color = MaterialTheme.colors.primaryVariant
-
-                )
-            }
-
-        }
-
-
-    }
-
-    @Composable
-    fun WordFooter(word: String, navController: NavHostController) {
-
-        Divider()
-
-        Column(modifier = Modifier.padding(start = 30.dp, top = 20.dp)) {
-            Text(
-                text = "That’s it for “$word”!",
-                style = MaterialTheme.typography.h3,
-                textAlign = TextAlign.Left
-            )
-            Text(
-                text = stringResource(R.string.new_search),
-                style = MaterialTheme.typography.body2,
-                textAlign = TextAlign.Left
-            )
-        }
-
-
-
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(top = 30.dp, bottom = 28.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
-        ) {
-
-
-
-            Spacer(modifier = Modifier.height(10.dp))
-
-            ActionButton(
-                text = stringResource(R.string.new_search_btn),
-                onBtnClick = { navController.navigate(Screen.SearchScreen.route) }
-            )
-        }
-
-    }
-
-    @Composable
-    fun DefinitionsSection(
-        modifier: Modifier = Modifier,
-        def: List<SenseDto>?
-    ) {
-        def?.forEachIndexed { index, sense ->
-            Definitions(
-                index = index,
-                def = parseResponse(sense.definitions),
-                shortDef = parseResponse(sense.shortDefinitions),
-                examples = sense.examples,
-                subsenses = sense.subsenses
-            )
-        }
-    }
-
-    @Composable
-    fun Definitions(
-        index: Int,
-        def: String,
-        shortDef: String,
-        examples: List<ExampleDto>?,
-        subsenses: List<SubsenseDto>?,
-    ) {
-
-        Box(
-            modifier = Modifier.padding(start = 30.dp, end = 53.dp, top = 20.dp)
-        ) {
-
-            Column(){
-
-                Text(
-                    text = "${index + 1}) $def",
-                    style = MaterialTheme.typography.body1,
-                    color = MaterialTheme.colors.primary
-                )
-                Spacer(modifier = Modifier.height(15.dp))
-
-                Text(
-                    text = " SHORT $shortDef ",
-                    style = MaterialTheme.typography.body2,
-                    color = MaterialTheme.colors.primary
-                )
-                Spacer(modifier = Modifier.height(10.dp))
-
-                examples?.forEach { ex ->
-                    Text(
-                        text = "EXAMPLE ${ex.text}",
-                        style = MaterialTheme.typography.body2,
-                        color = MaterialTheme.colors.primary
-                    )
-
-                subsenses?.forEach {  sub ->
-                    Text(
-                        text = " SUB DEF ${sub.definitions}",
-                        style = MaterialTheme.typography.body2,
-                        color = MaterialTheme.colors.primary
-                    )
-                    Text(
-                        text = "SUB EX ${sub.examples}",
-                        style = MaterialTheme.typography.body2,
-                        color = MaterialTheme.colors.primary
-                    )
-                }
-                }
-                Spacer(
-                    modifier = Modifier.height(15.dp)
-                )
-
-            }
-        }
-    }
+//    @Composable
+//    fun WordFooter(word: String, navController: NavHostController) {
+//
+//        Divider()
+//
+//        Column(modifier = Modifier.padding(start = 30.dp, top = 20.dp)) {
+//            Text(
+//                text = "That’s it for “$word”!",
+//                style = MaterialTheme.typography.h3,
+//                textAlign = TextAlign.Left
+//            )
+//            Text(
+//                text = stringResource(R.string.new_search),
+//                style = MaterialTheme.typography.body2,
+//                textAlign = TextAlign.Left
+//            )
+//        }
+//
+//
+//
+//        Column(
+//            modifier = Modifier
+//                .fillMaxWidth()
+//                .padding(top = 30.dp, bottom = 28.dp),
+//            horizontalAlignment = Alignment.CenterHorizontally,
+//            verticalArrangement = Arrangement.Center
+//        ) {
+//
+//
+//
+//            Spacer(modifier = Modifier.height(10.dp))
+//
+//            ActionButton(
+//                text = stringResource(R.string.new_search_btn),
+//                onBtnClick = { navController.navigate(Screen.SearchScreen.route) }
+//            )
+//        }
+//
+//    }
+//
+//    @Composable
+//    fun DefinitionsSection(
+//        modifier: Modifier = Modifier,
+//        def: List<Sense>?
+//    ) {
+//        def?.forEachIndexed { index, sense ->
+//            Definitions(
+//                index = index,
+//                def = parseResponse(sense.definitions),
+//                shortDef = parseResponse(sense.shortDefinitions),
+//                examples = sense.examples,
+//                subsenses = sense.subsenses
+//            )
+//        }
+//    }
+//
+//    @Composable
+//    fun Definitions(
+//        index: Int,
+//        def: String,
+//        shortDef: String,
+//        examples: List<Example>?,
+//        subsenses: List<Subsense>?,
+//    ) {
+//
+//        Box(
+//            modifier = Modifier.padding(start = 30.dp, end = 53.dp, top = 20.dp)
+//        ) {
+//
+//            Column(){
+//
+//                Text(
+//                    text = "${index + 1}) $def",
+//                    style = MaterialTheme.typography.body1,
+//                    color = MaterialTheme.colors.primary
+//                )
+//                Spacer(modifier = Modifier.height(15.dp))
+//
+//                Text(
+//                    text = " SHORT $shortDef ",
+//                    style = MaterialTheme.typography.body2,
+//                    color = MaterialTheme.colors.primary
+//                )
+//                Spacer(modifier = Modifier.height(10.dp))
+//
+//                examples?.forEach { ex ->
+//                    Text(
+//                        text = "EXAMPLE ${ex.text}",
+//                        style = MaterialTheme.typography.body2,
+//                        color = MaterialTheme.colors.primary
+//                    )
+//
+//                subsenses?.forEach {  sub ->
+//                    Text(
+//                        text = " SUB DEF ${sub.definitions}",
+//                        style = MaterialTheme.typography.body2,
+//                        color = MaterialTheme.colors.primary
+//                    )
+//                    Text(
+//                        text = "SUB EX ${sub.examples}",
+//                        style = MaterialTheme.typography.body2,
+//                        color = MaterialTheme.colors.primary
+//                    )
+//                }
+//                }
+//                Spacer(
+//                    modifier = Modifier.height(15.dp)
+//                )
+//
+//            }
+//        }
+//    }
 

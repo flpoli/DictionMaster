@@ -31,9 +31,9 @@ fun SenseDto.toSense(): Sense {
 
     return Sense(
         definitions = definitions,
-        examples = examples,
+        examples = examples.map { it.toExample() },
         shortDefinitions = shortDefinitions,
-        subsenses = subsenses,
+        subsenses = subsenses.map { it.toSubsense() },
     )
 
 }

@@ -18,9 +18,9 @@ data class EntryDto(
 fun EntryDto.toEntry(): Entry {
 
     return Entry(
-        grammaticalFeatures = grammaticalFeatures,
-        pronunciations = pronunciations,
-        senses = senses
+        grammaticalFeatures = grammaticalFeatures.map { it.toGrammaticalFeature() },
+        pronunciations = pronunciations.map { it.toPronunciation()},
+        senses = senses.map { it.toSense() }
     )
 
 }

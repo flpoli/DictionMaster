@@ -10,8 +10,8 @@ import retrofit2.http.Path
 interface OxfordApi {
 
     @Headers("app_id: $APP_ID", "app_key: $APP_KEY")
-    @GET("{lang}/{word}?fields=definitions%2Cexamples%2Cpronunciations%2CshortDefinitions%2CvariantForms&strictMatch=false")
-      suspend fun searchWord(
+    @GET("{lang}/{word}")
+      suspend fun getWordInfo(
         @Path("lang") lang: String,
         @Path("word") word: String
     ): WordInfoDto

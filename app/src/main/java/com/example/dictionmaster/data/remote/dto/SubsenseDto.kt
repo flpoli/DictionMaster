@@ -29,7 +29,7 @@ fun SubsenseDto.toSubsense(): Subsense {
 
     return Subsense(
         definitions = definitions,
-        examples = examples,
+        examples = examples.map { it.toExampleX() },
         shortDefinitions = shortDefinitions
     )
 

@@ -19,7 +19,7 @@ fun SetupNavGraph(navController: NavHostController){
 
     NavHost(
         navController = navController,
-        startDestination =  Screen.SplashScreen.route
+        startDestination =  Screen.SearchScreen.route
     ){
         
         composable("splash_screen"){
@@ -39,7 +39,7 @@ fun SetupNavGraph(navController: NavHostController){
 
             entry -> ResultScreen(
                 navController = navController,
-                lang = entry.arguments!!.getString("lang")!!,  // not the best way here
+                lang = entry.arguments!!.getString("lang")!!,
                 word = entry.arguments!!.getString("word")!!,
                 )
         }

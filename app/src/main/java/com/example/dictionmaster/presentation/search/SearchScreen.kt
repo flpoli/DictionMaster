@@ -27,6 +27,7 @@ fun SearchScreen(
     navController: NavHostController
 
 ){
+
     SearchScreenContent(
         onLanguageChange = viewModel::onLangSelected,
         onWordChange = viewModel::onWordEnter,
@@ -44,7 +45,7 @@ fun SearchScreenContent(
 ){
     val word by viewModel.word
     val langCode by viewModel.langCode
-    var countLimit by remember { viewModel.countLimit }
+//    var countLimit by remember { viewModel.countLimit }
 
 //    val langs = mapOf(
 //        "ENGLISH" to painterResource(R.drawable.en_icon),
@@ -82,14 +83,8 @@ fun SearchScreenContent(
 
             SearchButton(
                 onClick = {
-
-                    if(viewModel.onSearchLimitReached(countLimit)){
-                        navController.navigate(Screen.PurchaseScreen.route)
-                    } else {
+                        println("Onclick: $langCode, $word")
                         navController.navigate(Screen.ResultScreen.route + "/${langCode}" +"/${word}")
-                        countLimit++
-                    }
-
                 }
             )
         }
