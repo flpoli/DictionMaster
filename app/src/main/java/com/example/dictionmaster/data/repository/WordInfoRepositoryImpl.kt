@@ -19,19 +19,18 @@ class WordInfoRepositoryImpl(private val api: OxfordApi, private val dao: WordIn
 
 
 
-        override fun getWordInfo(lang: String, word: String): Flow<Resource<WordInfo>> = flow {
-
+        override fun getWordInfo(lang: String, word: String): Flow<Resource<List<WordInfo>>> = flow {
 
             emit(Resource.Loading())
 
-            val wordInfos = dao.getWordInfos(word).toWordInfo()
+            val wordInfos = dao.getWordInfos(word).map {it.toWordInfo()}
 
             emit(Resource.Loading(data = wordInfos))
 
             try {
 
                 val remoteWordInfos = api.getWordInfo(lang, word)
-                dao.insertWordInfos(remoteWordInfos.toWordInfoEntity())
+                dao.insertWordInfos(remoteWordInfos.map {it.toWordInfoEntity()})
 
 
             } catch (e: HttpException) {
@@ -50,8 +49,8 @@ class WordInfoRepositoryImpl(private val api: OxfordApi, private val dao: WordIn
             }
 
 
-            val newWordInfos = dao.getWordInfos(word).toWordInfo()
-
+            val newWordInfos = dao.getWordInfos(word).map {it.toWordInfo()}
+            println("New INFO: $newWordInfos")
             emit(Resource.Success(data = newWordInfos))
 
 

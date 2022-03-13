@@ -20,6 +20,7 @@ import com.example.dictionmaster.data.remote.OxfordApi
 import com.example.dictionmaster.data.repository.WordInfoRepositoryImpl
 import com.example.dictionmaster.data.util.GsonParser
 import com.example.dictionmaster.domain.repository.WordInfoRepository
+import com.example.dictionmaster.domain.use_case.GetWordInfo
 import com.example.dictionmaster.util.constants.Constants.BASE_URL
 import com.google.gson.Gson
 import dagger.Binds
@@ -72,13 +73,20 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideWordInfoDao(db: WordInfoDatabase): WordInfoDao = db.dao()
+    fun provideWordInfoDao(db: WordInfoDatabase): WordInfoDao = db.dao
 
     @Provides
     @Singleton
-    fun provideWordInfoRepository(api: OxfordApi, dao: WordInfoDao): WordInfoRepository {
+    fun provideWordInfoRepository(api: OxfordApi, db: WordInfoDatabase): WordInfoRepository {
 
-        return WordInfoRepositoryImpl(api, dao)
+        return WordInfoRepositoryImpl(api, db.dao)
+    }
+
+    @Provides
+    @Singleton
+    fun provideGetWordInfoUseCase(repository: WordInfoRepository): GetWordInfo{
+
+        return GetWordInfo(repository)
     }
 
 }

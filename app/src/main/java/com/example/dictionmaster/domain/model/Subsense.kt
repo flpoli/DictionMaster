@@ -6,8 +6,8 @@ import com.example.dictionmaster.data.remote.dto.ExampleXDto
 
 data class Subsense(
 
-    val definitions: List<String> = emptyList(),
-    val examples: List<ExampleX> = emptyList(),
-    val shortDefinitions: List<String> = emptyList()
+    val definitions: List<String>,
+    val examples: List<ExampleX>,
+    val shortDefinitions: List<String>
 
 )

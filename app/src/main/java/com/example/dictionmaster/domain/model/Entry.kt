@@ -8,8 +8,8 @@ import com.example.dictionmaster.data.remote.dto.SenseDto
 
 data class Entry(
 
-    val grammaticalFeatures: List<GrammaticalFeature> = emptyList(),
-    val pronunciations: List<Pronunciation> = emptyList(),
-    val senses: List<Sense> = emptyList()
+    val grammaticalFeatures: List<GrammaticalFeature>,
+    val pronunciations: List<Pronunciation>,
+    val senses: List<Sense>
 
 )

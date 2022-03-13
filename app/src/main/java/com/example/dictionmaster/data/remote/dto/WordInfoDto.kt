@@ -10,14 +10,16 @@ data class WordInfoDto(
     @SerializedName("metadata")
     val metadata: Metadata,
     @SerializedName("results")
-    val results: List<ResultDto>,
+    var results: ArrayList<ResultDto> = arrayListOf(),
     @SerializedName("word")
-    val word: String
+    val word: String,
+
 )
 
 fun WordInfoDto.toWordInfoEntity(): WordInfoEntity {
 
     return WordInfoEntity(
+        id = id,
         word = word,
         results = results.map { it.toResult() },
     )

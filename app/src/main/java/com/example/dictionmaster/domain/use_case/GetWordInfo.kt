@@ -10,7 +10,7 @@ import javax.inject.Inject
 class GetWordInfo(private val repository: WordInfoRepository) {
 
 
-        operator fun invoke(lang: String, word: String): Flow<Resource<WordInfo>> {
+        operator fun invoke(lang: String, word: String): Flow<Resource<List<WordInfo>>> {
 
             if(word.isBlank()){
                 return flow { }

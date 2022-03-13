@@ -1,35 +1,12 @@
 package com.example.dictionmaster.presentation.result
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.VolumeUp
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.runtime.getValue
 
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
-import com.example.dictionmaster.R
-import com.example.dictionmaster.data.remote.dto.ExampleDto
-import com.example.dictionmaster.data.remote.dto.SenseDto
-import com.example.dictionmaster.data.remote.dto.SubsenseDto
-import com.example.dictionmaster.domain.model.Example
-import com.example.dictionmaster.domain.model.Sense
-import com.example.dictionmaster.domain.model.Subsense
-import com.example.dictionmaster.navigation.Screen
-import com.example.dictionmaster.presentation.components.ActionButton
-import com.example.dictionmaster.util.playPronunciation
 
 
 fun parseResponse(res: List<String>): String {
@@ -50,8 +27,8 @@ fun ResultScreen(
     }
 
     viewModel.onSearch(lang, word)
-
-    Text(text = "${state.wordInfo}")
+    Text(text = "oi?")
+    Text(text = "${state.wordInfoItems}")
 
 
 //    WordHeader(

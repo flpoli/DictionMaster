@@ -11,7 +11,7 @@ import com.example.dictionmaster.data.local.entity.WordInfoEntity
 @TypeConverters(Converters::class)
 abstract class WordInfoDatabase: RoomDatabase() {
 
-    abstract fun dao():  WordInfoDao
+    abstract val dao:  WordInfoDao
 
 
 }

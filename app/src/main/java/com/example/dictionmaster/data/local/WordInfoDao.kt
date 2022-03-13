@@ -7,8 +7,8 @@ import com.example.dictionmaster.data.local.entity.WordInfoEntity
 interface WordInfoDao {
 
    @Insert(onConflict = OnConflictStrategy.REPLACE)
-   suspend fun insertWordInfos(infos: WordInfoEntity)
+   suspend fun insertWordInfos(infos: List<WordInfoEntity>)
 
    @Query("SELECT * FROM wordinfoentity WHERE word LIKE '%' || :word || '%'")
-   suspend fun getWordInfos(word: String): WordInfoEntity
+   suspend fun getWordInfos(word: String): List<WordInfoEntity>
 }

@@ -10,8 +10,8 @@ import com.example.dictionmaster.domain.model.WordInfo
 @TypeConverters(Converters::class)
 data class WordInfoEntity(
 
-    @PrimaryKey(autoGenerate = true)
-    val id: Int? = null,
+    @PrimaryKey
+    val id: String,
     val word: String,
     val results: List<Result>
 
@@ -21,7 +21,7 @@ data class WordInfoEntity(
 fun WordInfoEntity.toWordInfo(): WordInfo {
 
     return WordInfo(
-        //id = id,
+        id = id,
         word = word,
         results = results
     )

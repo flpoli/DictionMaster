@@ -7,10 +7,10 @@ import com.example.dictionmaster.data.remote.dto.SubsenseDto
 
 data class Sense (
 
-    val definitions: List<String> = emptyList(),
-    val examples: List<Example> = emptyList(),
-    val shortDefinitions: List<String> = emptyList(),
-    val subsenses: List<Subsense> = emptyList()
+    val definitions: List<String>,
+    val examples: List<Example>,
+    val shortDefinitions: List<String>,
+    val subsenses: List<Subsense>
 
     )
 
