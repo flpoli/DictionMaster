@@ -7,7 +7,7 @@ Há duas branches no repositório, em que eu cheguei em diferentes partes do des
     Nesta branche há uma tentativa de implementar o mecanismo de cache utilizando Room Database,
     entretando encontrei algumas dificuldades em realizar o parse dos objetos JSON para o Banco,
     infelizmente não consegui solucionar isto em tempo hábil. Por conta disto decidi focar na entrega das telas funcionais.
-    Ainda que não implementado acredito que seja possível a partir do código depreender a lógica eu gostaria de utilizar.
+    Ainda que não implementado, acredito que seja possível a partir do código depreender a lógica que eu gostaria de utilizar.
     
  -  ALL-SCREEN-WORK-NO-CACHE:
  
